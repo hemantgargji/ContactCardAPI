@@ -83,6 +83,9 @@ namespace Contact.DAL.Repositories
             _dbSet.Add(entity);
             _context.SaveChanges();
         }
-
+        public virtual void Update(TEntity entity)
+        {
+            
+        }
     }
 }

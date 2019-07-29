@@ -13,7 +13,7 @@ namespace Contact.DAL.IRepositories
         TEntity GetByID(int id);
         void Insert(TEntity entity);
         void Delete(int id);
-        //void Update(TEntity entity);
+        void Update(TEntity entity);
         void Save(TEntity entity);
     }
 }
