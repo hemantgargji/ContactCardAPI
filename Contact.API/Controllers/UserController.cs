@@ -27,10 +27,7 @@ namespace Contact.WebAPI.Controllers
             _userPositionRepository = userPositionRepository;
             _userAddressRepository = userAddressRepository;
         }
-        public UserController()
-        {
 
-        }
 
         [HttpGet]
         [Route("getUsers/{id}")]
