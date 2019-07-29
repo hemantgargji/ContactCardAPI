@@ -15,24 +15,47 @@ namespace Contact.WebAPI.Controllers
     public class UserController : ApiController
     {
         private readonly IUserRepository _userRepository;
+        private readonly IOrganisationRepository _userOrganisationRepository;
+        private readonly IPositionRepository _userPositionRepository;
+        private readonly IAddressRepository _userAddressRepository;
+        public UserController( IUserRepository userrepository, IOrganisationRepository userOrganisationRepository,
+        IPositionRepository userPositionRepository,
+       IAddressRepository  userAddressRepository )
+        {
+            _userRepository = userrepository;
+            _userOrganisationRepository = userOrganisationRepository;
+            _userPositionRepository = userPositionRepository;
+            _userAddressRepository = userAddressRepository;
+        }
         public UserController()
         {
-            
+
+        }
+
+        [HttpGet]
+        [Route("getUsers/{id}")]
+        public  IHttpActionResult GetUsersByID( string id)
+        {
+                var users = _userRepository.GetByID(Convert.ToInt32(id));
+                return Ok(users);
         }
 
         [HttpGet]
         [Route("getUsers")]
-        public async Task<IHttpActionResult> GetUsers()
+        public IHttpActionResult GetAllUsers()
         {
             var users = _userRepository.GetAll().ToList();
             return Ok(users);
         }
 
-        [HttpPost]
-        [Route("addUser")]
-        public async Task<IHttpActionResult> AddUser()
+        [HttpDelete]
+        [Route("deleteUsers/{id}")]
+        public IHttpActionResult DeleteUsers(string id)
         {
+            _userRepository.Delete(Convert.ToInt32(id));
             return Ok(200);
         }
+
+
     }
 }
