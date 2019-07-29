@@ -1,5 +1,5 @@
-﻿using Contact.DAL.Models;
-using Contact.DAL.IRepositories;
+﻿using Contact.DataAccess.Models;
+using Contact.DataAccess.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -42,7 +42,12 @@ namespace Contact.WebAPI.Controllers
         public IHttpActionResult GetAllUsers()
         {
             var users = _userRepository.GetAll().ToList();
-            return Ok(users);
+            var data = users.Select(x => new
+            {
+                Firstname = x.first_name
+
+            });
+            return Ok(data);
         }
 
         [HttpDelete]

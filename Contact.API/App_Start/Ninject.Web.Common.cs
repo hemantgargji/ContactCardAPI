@@ -11,10 +11,10 @@ namespace Contact.API.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
-    using DAL.IRepositories;
-    using DAL.Repositories;
+    using DataAccess.IRepositories;
+    using Contact.DataAccess.Repositories;
     using System.Data.Entity;
-    using DAL.Models;
+    using DataAccess.Models;
 
     public static class NinjectWebCommon 
     {
@@ -66,7 +66,7 @@ namespace Contact.API.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind(typeof(IRepository<>)).To(typeof(Repository<>));
-            kernel.Bind<DbContext>().To<ContactBusinessCardEntities1>();
+            kernel.Bind<DbContext>().To<ContactBusinessCardEntities>();
             kernel.Bind<IAddressRepository>().To<AddressRepository>();
             kernel.Bind<ICountryRepository>().To<CountryRepository>();
             kernel.Bind<IOrganisationRepository>().To<OrganisationRepository>();
