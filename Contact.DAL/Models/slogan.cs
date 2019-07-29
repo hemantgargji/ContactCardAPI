@@ -22,10 +22,8 @@ namespace Contact.DAL.Models
     
         public int id { get; set; }
         public string message { get; set; }
-        public Nullable<int> organisation_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<organisation> organisations { get; set; }
-        public virtual organisation organisation { get; set; }
     }
 }

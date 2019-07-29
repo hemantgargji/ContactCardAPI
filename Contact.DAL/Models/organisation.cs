@@ -18,7 +18,6 @@ namespace Contact.DAL.Models
         public organisation()
         {
             this.positions = new HashSet<position>();
-            this.slogans = new HashSet<slogan>();
             this.users = new HashSet<user>();
         }
     
@@ -33,8 +32,6 @@ namespace Contact.DAL.Models
         public virtual slogan slogan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<position> positions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<slogan> slogans { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user> users { get; set; }
     }

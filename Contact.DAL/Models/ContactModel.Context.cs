@@ -13,10 +13,10 @@ namespace Contact.DAL.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ContactBusinessCardEntities : DbContext
+    public partial class ContactBusinessCardEntities1 : DbContext
     {
-        public ContactBusinessCardEntities()
-            : base("name=ContactBusinessCardEntities")
+        public ContactBusinessCardEntities1()
+            : base("name=ContactBusinessCardEntities1")
         {
         }
     

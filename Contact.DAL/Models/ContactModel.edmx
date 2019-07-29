@@ -56,7 +56,6 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="message" Type="varchar" MaxLength="255" />
-          <Property Name="organisation_id" Type="int" />
         </EntityType>
         <EntityType Name="state">
           <Key>
@@ -141,18 +140,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__slogan__organisa__3B75D760">
-          <End Role="organisation" Type="Self.organisation" Multiplicity="0..1" />
-          <End Role="slogan" Type="Self.slogan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="organisation">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="slogan">
-              <PropertyRef Name="organisation_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__state__country_i__3A81B327">
           <End Role="country" Type="Self.country" Multiplicity="0..1" />
           <End Role="state" Type="Self.state" Multiplicity="*" />
@@ -230,10 +217,6 @@
             <End Role="organisation" EntitySet="organisation" />
             <End Role="position" EntitySet="position" />
           </AssociationSet>
-          <AssociationSet Name="FK__slogan__organisa__3B75D760" Association="Self.FK__slogan__organisa__3B75D760">
-            <End Role="organisation" EntitySet="organisation" />
-            <End Role="slogan" EntitySet="slogan" />
-          </AssociationSet>
           <AssociationSet Name="FK__state__country_i__3A81B327" Association="Self.FK__state__country_i__3A81B327">
             <End Role="country" EntitySet="country" />
             <End Role="state" EntitySet="state" />
@@ -301,7 +284,6 @@
           <NavigationProperty Name="address" Relationship="Self.FK__organisat__addre__38996AB5" FromRole="organisation" ToRole="address" />
           <NavigationProperty Name="slogan" Relationship="Self.FK__organisat__sloga__37A5467C" FromRole="organisation" ToRole="slogan" />
           <NavigationProperty Name="positions" Relationship="Self.FK__position__organi__36B12243" FromRole="organisation" ToRole="position" />
-          <NavigationProperty Name="slogans" Relationship="Self.FK__slogan__organisa__3B75D760" FromRole="organisation" ToRole="slogan" />
           <NavigationProperty Name="users" Relationship="Self.FK__user__organisati__34C8D9D1" FromRole="organisation" ToRole="user" />
         </EntityType>
         <EntityType Name="position">
@@ -320,9 +302,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="message" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="organisation_id" Type="Int32" />
           <NavigationProperty Name="organisations" Relationship="Self.FK__organisat__sloga__37A5467C" FromRole="slogan" ToRole="organisation" />
-          <NavigationProperty Name="organisation" Relationship="Self.FK__slogan__organisa__3B75D760" FromRole="slogan" ToRole="organisation" />
         </EntityType>
         <EntityType Name="state">
           <Key>
@@ -436,18 +416,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__slogan__organisa__3B75D760">
-          <End Role="organisation" Type="Self.organisation" Multiplicity="0..1" />
-          <End Role="slogan" Type="Self.slogan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="organisation">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="slogan">
-              <PropertyRef Name="organisation_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__user__organisati__34C8D9D1">
           <End Role="organisation" Type="Self.organisation" Multiplicity="0..1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
@@ -472,7 +440,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ContactBusinessCardEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ContactBusinessCardEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="addresses" EntityType="Self.address" />
           <EntitySet Name="AddressTypes" EntityType="Self.AddressType" />
           <EntitySet Name="countries" EntityType="Self.country" />
@@ -509,10 +477,6 @@
             <End Role="organisation" EntitySet="organisations" />
             <End Role="position" EntitySet="positions" />
           </AssociationSet>
-          <AssociationSet Name="FK__slogan__organisa__3B75D760" Association="Self.FK__slogan__organisa__3B75D760">
-            <End Role="organisation" EntitySet="organisations" />
-            <End Role="slogan" EntitySet="slogans" />
-          </AssociationSet>
           <AssociationSet Name="FK__user__organisati__34C8D9D1" Association="Self.FK__user__organisati__34C8D9D1">
             <End Role="organisation" EntitySet="organisations" />
             <End Role="user" EntitySet="users" />
@@ -527,7 +491,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ContactBusinessCardModelStoreContainer" CdmEntityContainer="ContactBusinessCardEntities">
+        <EntityContainerMapping StorageEntityContainer="ContactBusinessCardModelStoreContainer" CdmEntityContainer="ContactBusinessCardEntities1">
           <EntitySetMapping Name="addresses">
             <EntityTypeMapping TypeName="ContactBusinessCardModel.address">
               <MappingFragment StoreEntitySet="address">
@@ -583,7 +547,6 @@
               <MappingFragment StoreEntitySet="slogan">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="message" ColumnName="message" />
-                <ScalarProperty Name="organisation_id" ColumnName="organisation_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
