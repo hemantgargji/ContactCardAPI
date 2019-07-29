@@ -25,7 +25,6 @@ namespace Contact.WebAPI.Controllers
         public async Task<IHttpActionResult> GetUsers()
         {
             var users = _userRepository.GetAll().ToList();
-            var org = users[0].organisation.name;
             return Ok(users);
         }
 
