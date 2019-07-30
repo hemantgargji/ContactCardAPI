@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace Contact.API.Interfaces
 {
-    interface IContactMethods
+    interface IContact
     {
         IHttpActionResult GetUsersByID(string id);
         IHttpActionResult GetAllUsers();

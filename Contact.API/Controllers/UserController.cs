@@ -13,7 +13,7 @@ using System.Web.Http;
 
 namespace Contact.WebAPI.Controllers
 {
-    public class UserController : ApiController, IContactMethods
+    public class UserController : ApiController, IContact
     {
         private readonly IUserRepository _userRepository;
         private readonly IOrganisationRepository _userOrganisationRepository;
@@ -34,6 +34,8 @@ namespace Contact.WebAPI.Controllers
         [Route("getUsers/{id}")]
         public  IHttpActionResult GetUsersByID( string id)
         {
+            try
+            {
                 var users = _userRepository.GetByID(Convert.ToInt32(id));
                 var data = new user();
                 data.id = users.id;
@@ -47,36 +49,58 @@ namespace Contact.WebAPI.Controllers
                 data.email = users.email;
                 data.address_id = users.address_id;
                 return Ok(data);
+            }
+            catch
+            {
+                return NotFound();
+            }
+               
         }
 
         [HttpGet]
         [Route("getAllUsers")]
         public IHttpActionResult GetAllUsers()
         {
-            var users = _userRepository.GetAll().ToList();
-            var data = users.Select(x => new
+            try
             {
-                Id = x.id,
-                FirstName = x.first_name,
-                LastName = x.last_name,
-                isDeleted= x.isDeleted,
-                MobileNo = x.mob_no,
-                OrgansationID=x.organisation_id,
-                PositionID =x.position_id,
-                Alt_MobileNO=  x.alt_mob_no,
-                Email =  x.email,
-                AddressID = x.address_id
+                var users = _userRepository.GetAll().ToList();
+                var data = users.Select(x => new
+                {
+                    Id = x.id,
+                    FirstName = x.first_name,
+                    LastName = x.last_name,
+                    isDeleted = x.isDeleted,
+                    MobileNo = x.mob_no,
+                    OrgansationID = x.organisation_id,
+                    PositionID = x.position_id,
+                    Alt_MobileNO = x.alt_mob_no,
+                    Email = x.email,
+                    AddressID = x.address_id
 
-            });
-            return Ok(data);
+                });
+                return Ok(data);
+            }
+            catch
+            {
+                return NotFound();
+            }
+           
         }
 
         [HttpDelete]
         [Route("deleteUsers/{id}")]
         public IHttpActionResult DeleteUsers(string id)
         {
-            _userRepository.Delete(Convert.ToInt32(id));
-            return Ok(200);
+            try
+            {
+                _userRepository.Delete(Convert.ToInt32(id));
+                return Ok(200);
+            }
+            catch
+            {
+              return  NotFound();
+            }
+            
         }
 
 
