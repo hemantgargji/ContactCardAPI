@@ -9,10 +9,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-
+using System.Web.Http.Cors;
 
 namespace Contact.WebAPI.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserController : ApiController, IContact
     {
         private readonly IUserRepository _userRepository;
@@ -64,7 +65,7 @@ namespace Contact.WebAPI.Controllers
             try
             {
                 var users = _userRepository.GetAll().ToList();
-                var data = users.Select(x => new
+                var data = users.Where(x=>x.isDeleted == null || x.isDeleted == false).Select(x => new
                 {
                     Id = x.id,
                     FirstName = x.first_name,
@@ -77,7 +78,7 @@ namespace Contact.WebAPI.Controllers
                     Email = x.email,
                     AddressID = x.address_id
 
-                });
+                }).ToList();
                 return Ok(data);
             }
             catch

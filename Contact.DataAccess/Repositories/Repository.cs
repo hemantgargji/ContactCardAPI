@@ -71,11 +71,12 @@ namespace Contact.DataAccess.Repositories
 
         public virtual void Delete(TEntity entityToDelete)
         {
-            if (_context.Entry(entityToDelete).State == EntityState.Detached)
-            {
-                _dbSet.Attach(entityToDelete);
-            }
+        //    if (_context.Entry(entityToDelete).State == EntityState.Detached)
+        //    {
+            //    _dbSet.Attach(entityToDelete);
+          //  }
             _dbSet.Remove(entityToDelete);
+            _context.SaveChanges();
         }
 
         public virtual void Save(TEntity entity)

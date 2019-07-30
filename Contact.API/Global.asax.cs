@@ -11,6 +11,7 @@ namespace Contact.API
     {
         protected void Application_Start()
         {
+            //GlobalConfiguration.Configuration.EnableCors();
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
