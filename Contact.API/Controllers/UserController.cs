@@ -1,5 +1,6 @@
 ﻿using Contact.DataAccess.Models;
 using Contact.DataAccess.IRepositories;
+using Contact.API.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,7 +13,7 @@ using System.Web.Http;
 
 namespace Contact.WebAPI.Controllers
 {
-    public class UserController : ApiController
+    public class UserController : ApiController, IContactMethods
     {
         private readonly IUserRepository _userRepository;
         private readonly IOrganisationRepository _userOrganisationRepository;
@@ -34,17 +35,37 @@ namespace Contact.WebAPI.Controllers
         public  IHttpActionResult GetUsersByID( string id)
         {
                 var users = _userRepository.GetByID(Convert.ToInt32(id));
-                return Ok(users);
+                var data = new user();
+                data.id = users.id;
+                data.first_name = users.first_name;
+                data.last_name = users.last_name;
+                data.isDeleted = users.isDeleted;
+                data.mob_no = users.mob_no;
+                data.organisation_id = users.organisation_id;
+                data.position_id = users.position_id;
+                data.alt_mob_no = users.alt_mob_no;
+                data.email = users.email;
+                data.address_id = users.address_id;
+                return Ok(data);
         }
 
         [HttpGet]
-        [Route("getUsers")]
+        [Route("getAllUsers")]
         public IHttpActionResult GetAllUsers()
         {
             var users = _userRepository.GetAll().ToList();
             var data = users.Select(x => new
             {
-                Firstname = x.first_name
+                Id = x.id,
+                FirstName = x.first_name,
+                LastName = x.last_name,
+                isDeleted= x.isDeleted,
+                MobileNo = x.mob_no,
+                OrgansationID=x.organisation_id,
+                PositionID =x.position_id,
+                Alt_MobileNO=  x.alt_mob_no,
+                Email =  x.email,
+                AddressID = x.address_id
 
             });
             return Ok(data);
