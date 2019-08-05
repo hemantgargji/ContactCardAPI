@@ -104,7 +104,7 @@ namespace Contact.WebAPI.Controllers
             
         }
         [HttpPost]
-        [Route("postUsers")]
+        [Route("createUser")]
         public IHttpActionResult CreateUsers([FromBody]user user)
         {
             try
@@ -119,7 +119,7 @@ namespace Contact.WebAPI.Controllers
 
         }
         [HttpPut]
-        [Route("putUsers")]
+        [Route("updateUser")]
         public IHttpActionResult UpdateUsers([FromBody]UserViewModel user,string id)
         {
             try
