@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contact.DataAccess.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace Contact.DataAccess.IRepositories
         TEntity GetByID(int id);
         void Insert(TEntity entity);
         void Delete(int id);
-        void Update(TEntity entity);
+        void Update(UserViewModel entity,int id);
         void Save(TEntity entity);
     }
 }

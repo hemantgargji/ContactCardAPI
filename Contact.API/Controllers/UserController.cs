@@ -102,7 +102,36 @@ namespace Contact.WebAPI.Controllers
             }
             
         }
+        [HttpPost]
+        [Route("postUsers")]
+        public IHttpActionResult CreateUsers([FromBody]user user)
+        {
+            try
+            {
+                _userRepository.Save(user);
+                return Ok(200);
+            }
+            catch(Exception ex)
+            {
+                return NotFound();
+            }
 
+        }
+        [HttpPut]
+        [Route("putUsers")]
+        public IHttpActionResult UpdateUsers([FromBody]UserViewModel user,string id)
+        {
+            try
+            {
+               
+                _userRepository.Update(user, Convert.ToInt32(id));
+                return Ok(200);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
 
+        }
     }
 }

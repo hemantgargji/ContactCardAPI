@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ContactBusinessCardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ContactBusinessCardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="address">
           <Key>
             <PropertyRef Name="id" />
@@ -69,7 +69,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="first_name" Type="varchar" MaxLength="255" />
           <Property Name="last_name" Type="varchar" MaxLength="255" />
           <Property Name="position_id" Type="int" />
@@ -152,7 +152,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__user__address_id__35BCFE0A">
+        <Association Name="FK__user__address_id__5CD6CB2B">
           <End Role="address" Type="Self.address" Multiplicity="0..1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
           <ReferentialConstraint>
@@ -164,7 +164,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__user__organisati__34C8D9D1">
+        <Association Name="FK__user__organisati__5DCAEF64">
           <End Role="organisation" Type="Self.organisation" Multiplicity="0..1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
           <ReferentialConstraint>
@@ -176,7 +176,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__user__position_i__33D4B598">
+        <Association Name="FK__user__position_i__5EBF139D">
           <End Role="position" Type="Self.position" Multiplicity="0..1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
           <ReferentialConstraint>
@@ -221,21 +221,20 @@
             <End Role="country" EntitySet="country" />
             <End Role="state" EntitySet="state" />
           </AssociationSet>
-          <AssociationSet Name="FK__user__address_id__35BCFE0A" Association="Self.FK__user__address_id__35BCFE0A">
+          <AssociationSet Name="FK__user__address_id__5CD6CB2B" Association="Self.FK__user__address_id__5CD6CB2B">
             <End Role="address" EntitySet="address" />
             <End Role="user" EntitySet="user" />
           </AssociationSet>
-          <AssociationSet Name="FK__user__organisati__34C8D9D1" Association="Self.FK__user__organisati__34C8D9D1">
+          <AssociationSet Name="FK__user__organisati__5DCAEF64" Association="Self.FK__user__organisati__5DCAEF64">
             <End Role="organisation" EntitySet="organisation" />
             <End Role="user" EntitySet="user" />
           </AssociationSet>
-          <AssociationSet Name="FK__user__position_i__33D4B598" Association="Self.FK__user__position_i__33D4B598">
+          <AssociationSet Name="FK__user__position_i__5EBF139D" Association="Self.FK__user__position_i__5EBF139D">
             <End Role="position" EntitySet="position" />
             <End Role="user" EntitySet="user" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ContactBusinessCardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

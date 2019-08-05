@@ -1,4 +1,5 @@
 ﻿using Contact.DataAccess.IRepositories;
+using Contact.DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -83,9 +84,29 @@ namespace Contact.DataAccess.Repositories
             _dbSet.Add(entity);
             _context.SaveChanges();
         }
-        public virtual void Update(TEntity entity)
+        public virtual void Update(UserViewModel entity,int id)
         {
-            
+
+            using (ContactBusinessCardEntities db = new ContactBusinessCardEntities())
+            {
+                var existinguser = db.users.FirstOrDefault(e => e.id == id);
+                if (existinguser != null)
+                {
+                    existinguser.first_name = entity.first_name;
+                    existinguser.last_name = entity.last_name;
+                    existinguser.address_id = entity.address_id;
+                    existinguser.position_id = entity.position_id;
+                    existinguser.organisation_id = entity.organisation_id;
+                    existinguser.mob_no = entity.mob_no;
+                    existinguser.alt_mob_no = entity.alt_mob_no;
+                    existinguser.email = entity.email;
+                    
+                    db.SaveChanges();
+
+                }
+
+
+            }
         }
     }
 }
