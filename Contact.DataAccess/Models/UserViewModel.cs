@@ -17,6 +17,6 @@ namespace Contact.DataAccess.Models
         public string alt_mob_no { get; set; }
         public string email { get; set; }
 
-
+        public AddressViewModel address { get; set; }
     }
 }

@@ -108,7 +108,7 @@ namespace Contact.WebAPI.Controllers
         public IHttpActionResult CreateUsers([FromBody]user user)
         {
             try
-            {
+            {                
                 _userRepository.Save(user);
                 return Ok(200);
             }
@@ -120,7 +120,7 @@ namespace Contact.WebAPI.Controllers
         }
         [HttpPut]
         [Route("updateUser")]
-        public IHttpActionResult UpdateUsers([FromBody]UserViewModel user,string id)
+        public IHttpActionResult UpdateUsers([FromBody]user user,string id)
         {
             try
             {

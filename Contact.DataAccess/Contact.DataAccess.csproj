@@ -57,6 +57,7 @@
     <Compile Include="Models\AddressType.cs">
       <DependentUpon>ContactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddressViewModel.cs" />
     <Compile Include="Models\ContactModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
