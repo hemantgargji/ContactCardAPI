@@ -33,26 +33,34 @@ namespace Contact.WebAPI.Controllers
 
         [HttpGet]
         [Route("getUsers/{id}")]
-        public  IHttpActionResult GetUsersByID( string id)
+        public  IHttpActionResult GetUsersByID(string id)
         {
             try
             {
-                var users = _userRepository.GetByID(Convert.ToInt32(id));
-                var data = new user();
-                data.id = users.id;
-                data.first_name = users.first_name;
-                data.last_name = users.last_name;
-                data.isDeleted = users.isDeleted;
-                data.mob_no = users.mob_no;
-                data.organisation_id = users.organisation_id;
-                data.position_id = users.position_id;
-                data.alt_mob_no = users.alt_mob_no;
-                data.email = users.email;
-                data.address_id = users.address_id;
-                return Ok(data);
+                bool containsInt = id.Any(char.IsDigit);
+                if (containsInt)
+                {
+                    var users = _userRepository.GetByID(Convert.ToInt32(id));
+                    var data = new user();
+                    data.id = users.id;
+                    data.first_name = users.first_name;
+                    data.last_name = users.last_name;
+                    data.isDeleted = users.isDeleted;
+                    data.mob_no = users.mob_no;
+                    data.organisation_id = users.organisation_id;
+                    data.position_id = users.position_id;
+                    data.alt_mob_no = users.alt_mob_no;
+                    data.email = users.email;
+                    data.address_id = users.address_id;
+                    return Ok(data);
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
-            catch
-            {
+            catch(Exception ex)
+            {               
                 return NotFound();
             }
                
@@ -81,7 +89,7 @@ namespace Contact.WebAPI.Controllers
                 }).ToList();
                 return Ok(data);
             }
-            catch
+            catch(Exception ex)
             {
                 return NotFound();
             }
@@ -94,8 +102,16 @@ namespace Contact.WebAPI.Controllers
         {
             try
             {
-                _userRepository.Delete(Convert.ToInt32(id));
-                return Ok(200);
+                bool containsInt = id.Any(char.IsDigit);
+                if (containsInt)
+                {
+                    _userRepository.Delete(Convert.ToInt32(id));
+                    return Ok(200);
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
             catch
             {
@@ -108,9 +124,16 @@ namespace Contact.WebAPI.Controllers
         public IHttpActionResult CreateUsers([FromBody]user user)
         {
             try
-            {                
-                _userRepository.Save(user);
-                return Ok(200);
+            {
+                if (user!=null)
+                {
+                    _userRepository.Save(user);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
             catch(Exception ex)
             {
@@ -124,9 +147,17 @@ namespace Contact.WebAPI.Controllers
         {
             try
             {
-               
-                _userRepository.Update(user, Convert.ToInt32(id));
-                return Ok(200);
+                bool containsInt = id.Any(char.IsDigit);
+                if (containsInt)
+                {
+                    _userRepository.Update(user, Convert.ToInt32(id));
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+
             }
             catch (Exception ex)
             {
