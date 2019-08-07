@@ -122,6 +122,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DBScript\ContactCardDBScript.sql" />
     <Content Include="Models\ContactModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ContactModel.edmx</DependentUpon>
