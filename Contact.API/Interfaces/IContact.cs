@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contact.DataAccess.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,9 @@ namespace Contact.API.Interfaces
         IHttpActionResult GetUsersByID(string id);
         IHttpActionResult GetAllUsers();
         IHttpActionResult DeleteUsers(string id);
+
+        IHttpActionResult CreateUsers(user user);
+
+        IHttpActionResult UpdateUsers(user user, string id);
     }
 }
