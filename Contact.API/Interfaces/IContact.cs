@@ -16,6 +16,6 @@ namespace Contact.API.Interfaces
 
         IHttpActionResult CreateUsers(user user);
 
-        IHttpActionResult UpdateUsers(user user, string id);
+        IHttpActionResult UpdateUsers(user user);
     }
 }

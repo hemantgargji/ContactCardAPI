@@ -14,7 +14,7 @@ namespace Contact.DataAccess.IRepositories
         TEntity GetByID(int id);
         void Insert(TEntity entity);
         void Delete(int id);
-        void Update(user entity,int id);
-        void Save(user entity);
+        void Update(TEntity entity);
+        void Save(TEntity entity);
     }
 }

@@ -15,7 +15,7 @@ namespace Contact.API.App_Start
     using Contact.DataAccess.Repositories;
     using System.Data.Entity;
     using DataAccess.Models;
-
+    using DataAccess.UnitOfWork;
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -67,13 +67,7 @@ namespace Contact.API.App_Start
         {
             kernel.Bind(typeof(IRepository<>)).To(typeof(Repository<>));
             kernel.Bind<DbContext>().To<ContactBusinessCardEntities>();
-            kernel.Bind<IAddressRepository>().To<AddressRepository>();
-            kernel.Bind<ICountryRepository>().To<CountryRepository>();
-            kernel.Bind<IOrganisationRepository>().To<OrganisationRepository>();
-            kernel.Bind<IPositionRepository>().To<PositionRepository>();
-            kernel.Bind<ISloganRepository>().To<SloganRepository>();
-            kernel.Bind<IStateRepository>().To<StateRepository>();
-            kernel.Bind<IUserRepository>().To<UserRepository>();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
         }        
     }
 }
