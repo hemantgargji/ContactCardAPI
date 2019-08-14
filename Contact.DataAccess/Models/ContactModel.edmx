@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="address_type" Type="uniqueidentifier" />
           <Property Name="street" Type="varchar" MaxLength="255" />
           <Property Name="street_2" Type="varchar" MaxLength="255" />
@@ -80,31 +80,7 @@
           <Property Name="email" Type="varchar" MaxLength="255" />
           <Property Name="isDeleted" Type="bit" />
         </EntityType>
-        <Association Name="FK__address__address__32E0915F">
-          <End Role="AddressType" Type="Self.AddressType" Multiplicity="0..1" />
-          <End Role="address" Type="Self.address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AddressType">
-              <PropertyRef Name="AddressTypeID" />
-            </Principal>
-            <Dependent Role="address">
-              <PropertyRef Name="address_type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__address__state_i__398D8EEE">
-          <End Role="state" Type="Self.state" Multiplicity="0..1" />
-          <End Role="address" Type="Self.address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="state">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="address">
-              <PropertyRef Name="state_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__organisat__addre__38996AB5">
+        <Association Name="FK__organisat__addre__03F0984C">
           <End Role="address" Type="Self.address" Multiplicity="0..1" />
           <End Role="organisation" Type="Self.organisation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -116,7 +92,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__organisat__sloga__37A5467C">
+        <Association Name="FK__organisat__addre__0C85DE4D">
+          <End Role="address" Type="Self.address" Multiplicity="0..1" />
+          <End Role="organisation" Type="Self.organisation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="address">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="organisation">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__organisat__sloga__04E4BC85">
           <End Role="slogan" Type="Self.slogan" Multiplicity="0..1" />
           <End Role="organisation" Type="Self.organisation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -128,7 +116,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__position__organi__36B12243">
+        <Association Name="FK__organisat__sloga__0D7A0286">
+          <End Role="slogan" Type="Self.slogan" Multiplicity="0..1" />
+          <End Role="organisation" Type="Self.organisation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="slogan">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="organisation">
+              <PropertyRef Name="slogan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__position__organi__0A9D95DB">
           <End Role="organisation" Type="Self.organisation" Multiplicity="0..1" />
           <End Role="position" Type="Self.position" Multiplicity="*" />
           <ReferentialConstraint>
@@ -140,19 +140,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__state__country_i__3A81B327">
-          <End Role="country" Type="Self.country" Multiplicity="0..1" />
-          <End Role="state" Type="Self.state" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="country">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="state">
-              <PropertyRef Name="country_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__user__address_id__5CD6CB2B">
+        <Association Name="FK__user__address_id__73BA3083">
           <End Role="address" Type="Self.address" Multiplicity="0..1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
           <ReferentialConstraint>
@@ -164,27 +152,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__user__organisati__5DCAEF64">
-          <End Role="organisation" Type="Self.organisation" Multiplicity="0..1" />
+        <Association Name="FK__user__address_id__7A672E12">
+          <End Role="address" Type="Self.address" Multiplicity="0..1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="organisation">
+            <Principal Role="address">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="user">
-              <PropertyRef Name="organisation_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__user__position_i__5EBF139D">
-          <End Role="position" Type="Self.position" Multiplicity="0..1" />
-          <End Role="user" Type="Self.user" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="position">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="user">
-              <PropertyRef Name="position_id" />
+              <PropertyRef Name="address_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -197,40 +173,32 @@
           <EntitySet Name="slogan" EntityType="Self.slogan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="state" EntityType="Self.state" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__address__address__32E0915F" Association="Self.FK__address__address__32E0915F">
-            <End Role="AddressType" EntitySet="AddressType" />
-            <End Role="address" EntitySet="address" />
-          </AssociationSet>
-          <AssociationSet Name="FK__address__state_i__398D8EEE" Association="Self.FK__address__state_i__398D8EEE">
-            <End Role="state" EntitySet="state" />
-            <End Role="address" EntitySet="address" />
-          </AssociationSet>
-          <AssociationSet Name="FK__organisat__addre__38996AB5" Association="Self.FK__organisat__addre__38996AB5">
+          <AssociationSet Name="FK__organisat__addre__03F0984C" Association="Self.FK__organisat__addre__03F0984C">
             <End Role="address" EntitySet="address" />
             <End Role="organisation" EntitySet="organisation" />
           </AssociationSet>
-          <AssociationSet Name="FK__organisat__sloga__37A5467C" Association="Self.FK__organisat__sloga__37A5467C">
+          <AssociationSet Name="FK__organisat__addre__0C85DE4D" Association="Self.FK__organisat__addre__0C85DE4D">
+            <End Role="address" EntitySet="address" />
+            <End Role="organisation" EntitySet="organisation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__organisat__sloga__04E4BC85" Association="Self.FK__organisat__sloga__04E4BC85">
             <End Role="slogan" EntitySet="slogan" />
             <End Role="organisation" EntitySet="organisation" />
           </AssociationSet>
-          <AssociationSet Name="FK__position__organi__36B12243" Association="Self.FK__position__organi__36B12243">
+          <AssociationSet Name="FK__organisat__sloga__0D7A0286" Association="Self.FK__organisat__sloga__0D7A0286">
+            <End Role="slogan" EntitySet="slogan" />
+            <End Role="organisation" EntitySet="organisation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__position__organi__0A9D95DB" Association="Self.FK__position__organi__0A9D95DB">
             <End Role="organisation" EntitySet="organisation" />
             <End Role="position" EntitySet="position" />
           </AssociationSet>
-          <AssociationSet Name="FK__state__country_i__3A81B327" Association="Self.FK__state__country_i__3A81B327">
-            <End Role="country" EntitySet="country" />
-            <End Role="state" EntitySet="state" />
-          </AssociationSet>
-          <AssociationSet Name="FK__user__address_id__5CD6CB2B" Association="Self.FK__user__address_id__5CD6CB2B">
+          <AssociationSet Name="FK__user__address_id__73BA3083" Association="Self.FK__user__address_id__73BA3083">
             <End Role="address" EntitySet="address" />
             <End Role="user" EntitySet="user" />
           </AssociationSet>
-          <AssociationSet Name="FK__user__organisati__5DCAEF64" Association="Self.FK__user__organisati__5DCAEF64">
-            <End Role="organisation" EntitySet="organisation" />
-            <End Role="user" EntitySet="user" />
-          </AssociationSet>
-          <AssociationSet Name="FK__user__position_i__5EBF139D" Association="Self.FK__user__position_i__5EBF139D">
-            <End Role="position" EntitySet="position" />
+          <AssociationSet Name="FK__user__address_id__7A672E12" Association="Self.FK__user__address_id__7A672E12">
+            <End Role="address" EntitySet="address" />
             <End Role="user" EntitySet="user" />
           </AssociationSet>
         </EntityContainer>
